@@ -1,13 +1,5 @@
 package com.trelloTest;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 /**
  *
  * @author David Zikmund
@@ -19,84 +11,64 @@ public class CompleteFlow {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //add ChromeDriver
-        System.setProperty("webdriver.chrome.driver", "src//com//trelloTest//chromedriver.exe");
+        String homePage = "https://trello.com";
+        String driverPath = "src//com//trelloTest//chromedriver.exe";
         
-        //create new instance chromedriver
-        WebDriver driver = new ChromeDriver();
-        
-        //set home page
-        driver.get("https://trello.com");
+        SelleniumWebDriver driver = new SelleniumWebDriver(driverPath, homePage);
         
         //login
-        driver.findElement(By.xpath("/html/body/div[1]/div[2]/a[1]")).click();
-        driver.findElement(By.xpath("//*[@id=\'user\']")).sendKeys("zikmund-david@seznam.cz");
-        driver.findElement(By.xpath("//*[@id=\'password\']")).sendKeys("12345678910");
-        driver.findElement(By.xpath("//*[@id=\'login\']")).click();
-        
+        driver.click("/html/body/div[1]/div[2]/a[1]");
+        driver.insertText("//*[@id=\'user\']", "zikmund-david@seznam.cz");
+        driver.insertText("//*[@id=\'password\']", "12345678910");
+        driver.click("//*[@id=\'login\']");
         //wait for login
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/a")));
-            boolean status = element.isDisplayed();
-            if(status) {
-                System.out.println("Login ok.");
-            }
-            
-        } catch(Exception e) {
-            System.out.println("Failure: " + e);
+        if(driver.waitFor("/html/body/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/a", 10)) {
+            System.out.println("Login: OK");
+        } else {
             driver.quit();
             System.exit(0);
         }
-        
+
         //new board
-        driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/a")).click();
-        driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[1]/div[1]/div/div[2]/div[2]/div/a[1]")).click();
-        
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/a");
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[1]/div/div[2]/div[2]/div/a[1]");
+
         //set blue background
-        driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div/div/div/form/div/ul/li[5]/button")).click();
-        
+        driver.click("/html/body/div[2]/div[2]/div[3]/div/div/div/form/div/ul/li[5]/button");
+
         //set boardname
-        driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div/div/div/form/div/div/div[1]/input")).sendKeys("New_Board_CompleteFlow");
-        
+        driver.insertText("/html/body/div[2]/div[2]/div[3]/div/div/div/form/div/div/div[1]/input", "New_Board_CompleteFlow");
+
         //set board private
-        driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div/div/div/form/div/div/div[2]/button")).click();
-        driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/ul/li[1]/a")).click();
+        driver.click("/html/body/div[2]/div[2]/div[3]/div/div/div/form/div/div/div[2]/button");
+        driver.click("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/ul/li[1]/a");
         
         //create board
-        driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div/div/div/form/button/span[2]")).click();
-        System.out.println("Create board ok.");
+        driver.click("/html/body/div[2]/div[2]/div[3]/div/div/div/form/button/span[2]");
         
         //wait for create new board
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, 100);
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[1]/li[4]/a")));
-            boolean status = element.isDisplayed();
-            if(status) {
-                System.out.println("Create ok.");
-            }
-            
-        } catch(Exception e) {
-            System.out.println("Failure: " + e);
+        if(driver.waitFor("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[1]/li[4]/a", 100)) {
+            System.out.println("Create: OK");
+        } else {
             driver.quit();
             System.exit(0);
         }
-        
+
         //delete board
-        try {
-            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[1]/li[4]/a")).click();
-            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[3]/li/a")).click();
-            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/div/div/input")).click();
-            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div/p[2]/a")).click();
-            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/div/div/input")).click();
-        } catch (Exception e) {
-            System.out.println("Failure: " + e);
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[1]/li[4]/a");
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[3]/li/a");
+        driver.click("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/div/div/input");
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div/p[2]/a");
+        driver.click("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/div/div/input");
+        
+        //wait for delete
+        if(driver.waitFor("/html/body/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/a/span", 100)) {
+            System.out.println("Delete: OK");
+        } else {
             driver.quit();
             System.exit(0);
         }
-        System.out.println("Delete board ok.");
-        
-        System.out.println("Everythink is ok.");
+        driver.setHomePage(homePage);
         //driver.quit();
     }
 
