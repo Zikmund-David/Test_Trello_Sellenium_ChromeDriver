@@ -57,6 +57,16 @@ public class NewBoard {
             driver.quit();
             System.exit(0);
         }
+        
+        System.out.println("Test: OK");
+        
+        //delete board and set on home page
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[1]/li[4]/a");
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[3]/li/a");
+        driver.click("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/div/div/input");
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div/p[2]/a");
+        driver.click("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/div/div/input");
+        driver.setHomePage(homePage);
     }
 
 }

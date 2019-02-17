@@ -49,7 +49,23 @@ public class NewList {
         driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[1]/div[3]/div/div/form/a/span");
         driver.insertText("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[1]/div[3]/div/div/form/input", "New_test_list");
         driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[1]/div[3]/div/div/form/div/input");
+        
         System.out.println("Create new list: OK");
+        
+        //delete board
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[1]/li[4]/a");
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[3]/li/a");
+        driver.click("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/div/div/input");
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div/p[2]/a");
+        driver.click("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/div/div/input");
+        driver.setHomePage(homePage);
+        
+        //set on default options and go to home page
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/a");
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[1]/div/div[2]/div[2]/div/a[1]");
+        driver.insertText("/html/body/div[2]/div[2]/div[3]/div/div/div/form/div/div/div[1]/input", "Board");
+        driver.click("/html/body/div[2]/div[2]/div[3]/div/div/div/form/button/span[2]");
+        driver.setHomePage(homePage);
     }
 
 }
