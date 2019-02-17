@@ -4,10 +4,10 @@ package com.trelloTest;
  *
  * @author David Zikmund
  */
-public class CompleteFlow {
-    
+public class NewCard {
+
     /**
-     * Test complete flow.
+     * Test create new card
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -32,36 +32,18 @@ public class CompleteFlow {
             driver.quit();
             System.exit(0);
         }
-
-        //new board
+        
+        //find board
         driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/a");
-        driver.click("/html/body/div[2]/div[2]/div[1]/div[1]/div/div[2]/div[2]/div/a[1]");
-
-        //set blue background
-        driver.click("/html/body/div[2]/div[2]/div[3]/div/div/div/form/div/ul/li[5]/button");
-
-        //set boardname
-        driver.insertText("/html/body/div[2]/div[2]/div[3]/div/div/div/form/div/div/div[1]/input", "New_Board_CompleteFlow");
-
-        //set board private
-        driver.click("/html/body/div[2]/div[2]/div[3]/div/div/div/form/div/div/div[2]/button");
-        driver.click("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/ul/li[1]/a");
+        driver.click("/html/body/div[2]/div[2]/div[1]/div[1]/div/div[2]/div[1]/div/div[3]/div/div[2]/ul/li[2]/div/a/span[2]/span");
         
-        //create board
-        driver.click("/html/body/div[2]/div[2]/div[3]/div/div/div/form/button/span[2]");
-        
-        //wait for create new board
-        if(driver.waitFor("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[1]/li[4]/a", 100)) {
-            System.out.println("Create new board: OK");
+        //wait for load
+        if(driver.waitFor("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[1]/div[3]/div/div/form/a/span", 10)) {
+            System.out.println("Load: OK");
         } else {
             driver.quit();
             System.exit(0);
         }
-        
-        //create new list
-        driver.insertText("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[1]/div[3]/div/div/form/input", "My new list");
-        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[1]/div[3]/div/div/form/div/input");
-        System.out.println("Create new list: OK");
         
         //create new card
         driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[1]/div[3]/div/div[1]/div[1]/a/span[2]");
@@ -94,19 +76,6 @@ public class CompleteFlow {
         driver.click("/html/body/div[2]/div[2]/div[3]/div/div/div/div[5]/div[8]/div/div[4]/div/a[1]");
         
         driver.click("/html/body/div[2]/div[2]/div[3]/div/div/a");
-        
-        /*
-        //delete board and set on home page
-        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[1]/li[4]/a");
-        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div[2]/div/div/div[2]/div/ul[3]/li/a");
-        driver.click("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/div/div/input");
-        driver.click("/html/body/div[2]/div[2]/div[1]/div[2]/div[3]/div/div/p[2]/a");
-        driver.click("/html/body/div[2]/div[2]/div[4]/div/div[2]/div/div/div/input");
-        driver.setHomePage(homePage);
-        */
-        
-        //quit chrome driver
-        driver.quit();
     }
 
 }

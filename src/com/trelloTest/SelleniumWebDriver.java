@@ -14,14 +14,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class SelleniumWebDriver {
     private WebDriver driver = null;
     
+    //set chrome driver
     private void setChromeDriver(String path) {
         System.setProperty("webdriver.chrome.driver", path);
     }
     
+    //set home page
     public void setHomePage(String homePage) {
         driver.get(homePage);
     }
 
+    //Constructor for class SelleniumWebDriver
     public SelleniumWebDriver(String driverPath, String homePage) {
         try {
             this.setChromeDriver(driverPath);
@@ -33,6 +36,7 @@ public class SelleniumWebDriver {
         }
     }
     
+    //click on component (by xpath)
     public void click(String xpath) {
         try {
             driver.findElement(By.xpath(xpath)).click();
@@ -42,6 +46,7 @@ public class SelleniumWebDriver {
         }
     }
     
+    //insert text into component (by xpath)
     public void insertText(String xpath, String text) {
         try {
             driver.findElement(By.xpath(xpath)).sendKeys(text);
@@ -51,6 +56,7 @@ public class SelleniumWebDriver {
         }
     }
     
+    //wait for load by visibility components
     public boolean waitFor(String componentPath, int time) {
         boolean result = false;
         try {
@@ -70,6 +76,7 @@ public class SelleniumWebDriver {
         return result;
     }
     
+    //quit chrome driver
     public void quit() {
         driver.quit();
     }
